@@ -15,7 +15,7 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - ./**  
+      - ./** 
       - .github/workflows/one-ms-aks.yml
   pull_request:
     branches: [ master ]
@@ -29,7 +29,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./**    
+        working-directory: ./**  
     steps:
     - uses: actions/checkout@v2
 
@@ -37,9 +37,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-
-    #- name: Run Unit Tests
-    #  run: mvn test
 
     - uses: actions/github-script@0.9.0
       if: failure()
@@ -94,3 +91,7 @@ jobs:
         app-name: ${{ env.webapp_name }}
         slot-name: staging
         images: ${{ env.registry }}/${{ env.repository }}:${{github.run_number}}
+
+    
+    #- name: Run Unit Tests
+    #  run: mvn test
