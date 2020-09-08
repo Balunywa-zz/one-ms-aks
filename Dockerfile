@@ -21,7 +21,7 @@ EXPOSE 8080
 # Add the application's jar to the container
 COPY --from=build-env target/*.jar one-ms-aks.jar
 #COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/one-ms-aks.jar"]
+#ENTRYPOINT ["java","-jar","/one-ms-aks.jar"]
 
-#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/user-java.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/one-ms-aks.jar"]
 #testoneone
