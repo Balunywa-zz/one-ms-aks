@@ -24,4 +24,4 @@ COPY --from=build-env target/*.jar one-ms-aks.jar
 ENTRYPOINT ["java","-jar","/one-ms-aks.jar"]
 
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/user-java.jar"]
-#testone
+#testoneone
