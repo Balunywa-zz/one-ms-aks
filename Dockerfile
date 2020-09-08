@@ -11,7 +11,7 @@ RUN mvn clean package
 FROM openjdk:8-jdk-alpine
 ARG JAR_FILE=target/*.jar
 
-EXPOSE 8080
+EXPOSE 80
 
 #ENV SQL_USER="YourUserName" \
 #SQL_PASSWORD="changeme" \
