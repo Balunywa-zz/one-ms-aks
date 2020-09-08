@@ -1,10 +1,8 @@
 name: User Java CICD
 
 env:
-  poi_path: /**
   registry: onemsacr.azurecr.io
   repository: one-ms-aks
-  docker_path: /**
   build_name: USER-JAVA
   webapp_name: one-ms-two
   staging_url: https://one-ms-two-staging.azurewebsites.net
@@ -15,12 +13,10 @@ on:
   push:
     branches: [ master ]
     paths: 
-      - /** 
       - .github/workflows/one-ms-aks.yml
   pull_request:
     branches: [ master ]
     paths: 
-      - /**
       - .github/workflows/one-ms-aks.yml
 
 jobs:
@@ -29,7 +25,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./**  
+        working-directory: ./**
     steps:
     - uses: actions/checkout@v2
 
