@@ -14,10 +14,12 @@ on:
     branches: [ master ]
     paths: 
       - .github/workflows/one-ms-aks.yml
+      - ./**
   pull_request:
     branches: [ master ]
     paths: 
       - .github/workflows/one-ms-aks.yml
+      - ./**
 
 jobs:
   build_and_test:
