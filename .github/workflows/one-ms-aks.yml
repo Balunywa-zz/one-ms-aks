@@ -88,4 +88,4 @@ jobs:
         slot-name: staging
         images: ${{ env.registry }}/${{ env.repository }}:${{github.run_number}}
 #test
-  
+#TESTING
