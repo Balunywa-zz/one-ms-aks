@@ -87,3 +87,4 @@ jobs:
         app-name: ${{ env.webapp_name }}
         slot-name: staging
         images: ${{ env.registry }}/${{ env.repository }}:${{github.run_number}}
+  
