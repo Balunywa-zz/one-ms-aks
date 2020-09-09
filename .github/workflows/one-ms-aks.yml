@@ -131,8 +131,22 @@ jobs:
       - name: Check Output Swap Slots
         shell: pwsh
         run: >
+          $output = '${{ steps.poi-health-check.outputs.output }}' |
+          ConvertFrom-Json
+
+          Write-Host " Status code is $($output.statusCode) "
+
+          if($($output.statusCode) -eq 200) {          
+
+          Write-host "Healthy" 
+
           az webapp deployment slot swap --name ${{ env.webapp_name }} --resource-group ${{ env.resource_group }} --slot staging --target-slot production }      
 
+          else {
+
+          Write-Error "POI API is not healthy"
+
+          }
 
       - uses: actions/github-script@0.9.0
         if: failure()
@@ -161,7 +175,7 @@ jobs:
         uses: satak/webrequest-action@master
         with:
           url: >-
-            https://one-ms-two-staging.azurewebsites.net/api/healthcheck/poi
+            https://one-ms-two-staging.azurewebsites.net/testone
           method: GET
       - name: Login via Az module
         uses: azure/login@v1.1
@@ -170,8 +184,19 @@ jobs:
       - name: Check Output Swap Slots
         shell: pwsh
         run: >
-          az webapp deployment slot swap --name ${{ env.webapp_name }} --resource-group ${{ env.resource_group }} --slot staging --target-slot production
-       
+          $output = '${{ steps.poi-health-check.outputs.output }}' |
+          ConvertFrom-Json
+
+          Write-Host " Status code is $($output.statusCode) "
+
+          if($($output.statusCode) -eq 200) {          
+            Write-host "Healthy"
+            }
+             else {
+             Write-Error "POI API is not healthy - reverting to previous version"
+             az webapp deployment slot swap --name ${{ env.webapp_name }} --resource-group ${{ env.resource_group }} --slot staging --target-slot production
+             }
+
       - uses: actions/github-script@0.9.0
         if: failure()
         with:
@@ -189,4 +214,3 @@ jobs:
               title: "${{ env.build_name }} Workflow ${{ github.run_number }} Failed! ",
               body: body
             });
-##
