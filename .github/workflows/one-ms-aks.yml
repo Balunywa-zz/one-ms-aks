@@ -175,7 +175,7 @@ jobs:
         uses: satak/webrequest-action@master
         with:
           url: >-
-            https://one-ms-two-staging.azurewebsites.net/testone
+            https://one-ms-two.azurewebsites.net/testone
           method: GET
       - name: Login via Az module
         uses: azure/login@v1.1
@@ -191,10 +191,13 @@ jobs:
 
           if($($output.statusCode) -eq 200) {          
             Write-host "Healthy"
+            az webapp deployment slot swap --name ${{ env.webapp_name }} --resource-group ${{ env.resource_group }} --slot staging --target-slot production
             }
+
              else {
+
              Write-Error "POI API is not healthy - reverting to previous version"
-             az webapp deployment slot swap --name ${{ env.webapp_name }} --resource-group ${{ env.resource_group }} --slot staging --target-slot production
+             
              }
 
       - uses: actions/github-script@0.9.0
