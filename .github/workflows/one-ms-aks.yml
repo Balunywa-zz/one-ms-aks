@@ -5,7 +5,7 @@ env:
   repository: one-ms-aks
   build_name: USER-JAVA
   webapp_name: one-ms-two
-  staging_url: https://one-ms-two-staging.azurewebsites.net
+  #staging_url: https://one-ms-two-staging.azurewebsites.net
   #prod_url: https://one-ms-two.azurewebsites.net
   resource_group: Lukman-RG
 
@@ -91,7 +91,7 @@ jobs:
         uses: Azure/webapps-deploy@v2
         with:
           app-name: '${{ env.webapp_name }}'
-          slot-name: staging
+          slot-name: dev
           images: '${{ env.registry }}/${{ env.repository }}:${{github.run_number}}'
 
       - uses: actions/github-script@0.9.0
